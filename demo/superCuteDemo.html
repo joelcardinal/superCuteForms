@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>superCuteForms Demo</title>
+<style>
+	/* example presentation CSS, not required */
+	.space { margin: 10px;}
+	div.radio { margin: 10px 0 !important;}
+</style>
+
+<link rel="stylesheet" href="../css/superCuteForms.css">
+
+</head>
+<body>
+	
+	<div class="space">
+		<input type="checkbox" value="myCheckBoxTest">
+	</div>
+
+	<div class="space">
+		<input type="radio" name="r1" value="myRadio1">
+		<input type="radio" name="r1" value="myRadio2">
+	</div>
+
+	<div class="space">
+	  <select>
+	    <option>Here is the first option</option>
+	    <option>The second option</option>
+	    <option>The third option</option>
+	  </select>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="../js/superCuteForms.js"></script>
+	<script>
+ 
+		// init
+		$(document).ready(function(){
+			$( "body" ).superCuteForms();
+		});
+		
+		/*
+
+		!!! USAGE EXAMPLES !!!
+
+		Usage example:
+		$( "body" ).superCuteForms();
+
+		Usage example of undoing any changes made by superCuteForms
+		$.superCuteForms.undo();
+
+		Usage example of undoing any changes made by superCuteForms within optional selection query (won't affect elements outside selection):
+		$.superCuteForms.undo('div.myClass');
+
+		Usage example of retrieving jQuery collection of all elements on page affected by superCuteForms
+		$.superCuteForms.affected();
+
+		*/
+
+	</script>
+
+</body>
+</html>

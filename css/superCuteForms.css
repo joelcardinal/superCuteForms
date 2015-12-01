@@ -1,0 +1,90 @@
+/*
+*	Required CSS for jQuery.superCuteForms.js
+*
+*	You will need to change height, width, images for your needs
+*/
+
+/* checkboxes & radios */
+
+div.checkbox, div.radio {
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	display: block;
+}
+div.checkbox input, div.radio input {
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	/* opacity fallbacks */
+	/* IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	/* IE 5-7 */
+	filter: alpha(opacity=50);
+	/* Netscape */
+	-moz-opacity: 0.5;
+	/* Safari 1.x */
+	-khtml-opacity: 0.5;
+
+}
+div.checkbox div, div.radio div {
+	width: 16px;
+	height: 16px;
+	background-repeat: no-repeat;
+	-webkit-font-smoothing: antialiased;
+}
+
+div.checkbox div.checked {
+	background: no-repeat 0px -27px url(http://www.joelcardinal.com/crocs/forms/input_select.png);
+	border: thin solid #aaa;
+}
+div.checkbox div.unchecked {
+	background: no-repeat 0px -44px url(http://www.joelcardinal.com/crocs/forms/input_select.png);
+	border: thin solid #aaa;
+}
+div.radio div.checked {
+	background: no-repeat 0px -61px url(http://www.joelcardinal.com/crocs/forms/input_select.png);
+}
+div.radio div.unchecked {
+	background: no-repeat 0px -78px url(http://www.joelcardinal.com/crocs/forms/input_select.png);
+}
+
+/* selects */
+
+/*
+*	Wrapping div is added automatically via js,
+*	and needs to be wider than the actual select
+*	so that the custom img covers the browsers
+*	select arrows. Your img will depend on the
+*	overlap necessary.
+*/
+
+div.select {
+	height: 24px;
+	width: 150px;
+	background: no-repeat right 0px url(http://www.joelcardinal.com/crocs/forms/input_select.png);
+	overflow: hidden;
+	background-color: #FAFAFA;
+}
+div.select select {
+	height: 24px;
+	width: 170px;
+	outline: none;
+	background: transparent;
+	border: none;
+	border: 1px solid #ccc;
+	color: #000;
+	line-height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+	font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
+	/* If you add too much padding here, the options won't show in IE
+	padding: 2px; */
+}

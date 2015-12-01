@@ -1,6 +1,12 @@
 superCuteForms
 ==============
 
+```
+(\__/)     [x]
+(>'.')     (0)
+(_(")_(")  [- v]
+```
+
 This is a jQuery plugin that wraps radio, checkbox, and select form elements to make them super cute (allowing you to style them in a way CSS doesn't currently allow).  Inspired by uniform.js this is an effort to create a more minamal, faster executing plugin.
 
 Reguires jQuery 1.7 (but can probably use lower version)

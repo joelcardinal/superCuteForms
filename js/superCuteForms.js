@@ -16,103 +16,108 @@
 */
 
 (function ($) {
-
-    $.fn.superCuteForms = function () {
-        var arr = [];
-
-        this.find('input[type="checkbox"], input[type="radio"], select').each(function () {
-
-            var $formElem = $(this);
-
-            if (!$formElem.hasClass('superCuteFormElem')) {
-                var type = $formElem.attr('type') || 'select',
-                    checkedState = function ($inputElem) {
-                        var state;
-                        $inputElem[0].checked ? state = "checked" : state = "unchecked";
-                        return state;
-                    };
-                arr.push($formElem);
-                if (type != 'select') {
-                    $formElem.addClass('superCuteFormElem').wrap('<div class="' + type + ' superCuteFormElemWrapper"></div>');
-                    $formElem.parent().append('<div class="' + checkedState($formElem) + ' superCuteFormElemWrapper"></div>');
+	var superCuteFormElemClass = 'superCuteFormElem',
+		superCuteFormElemWrapperClass = 'superCuteFormElemWrapper',
+		type = function($formElem){ return $formElem.attr('type') || 'select'},
+		classToRemove,
+		affectedArr = [],
+		elemSelector = 'input[type="checkbox"], input[type="radio"], select',
+	    checkedState = function ($inputElem) {
+	        var state;
+	        if ($inputElem[0].checked) {
+				state = "checked";
+				classToRemove = "unchecked";
+			} else {
+				state = "unchecked";
+				classToRemove = "checked";
+			}
+	        return state;
+	    },
+		getSelection = function (selector){
+			var $selection;
+			if(!selector){
+				if(document.querySelectorAll){
+					$selection = $(document.querySelectorAll(elemSelector));
+				}else{
+					$selection = $('body').find(elemSelector);
+				}
+			}else{
+				var tagName = $(selector)[0].tagName.toLowerCase();
+				if( tagName == 'input' || tagName == 'select'){
+					$selection = $(selector);
+				}else{
+					$selection = $(selector).find(elemSelector);
+				}
+			}
+			return $selection;
+		};
+		
+    $.superCuteForms = {};
+	
+	$.superCuteForms.wrap = function(selector) {
+		$.each(getSelection(selector),function () {
+           var $formElem = $(this);
+           if (!$formElem.hasClass(superCuteFormElemClass)) {
+				var inputType = type($formElem);
+                affectedArr.push(this);
+                if (inputType != 'select') {
+					var state = checkedState($formElem);
+					$formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>').parent().append('<div class="' + state + ' ' + superCuteFormElemWrapperClass + '"></div>');
                     $formElem.on("change", function () {
-                        if (type === "checkbox") {
-                            $formElem.next('div').removeClass().addClass((checkedState($formElem) + ' superCuteFormElemWrapper'));
-                        } else {
-                            $.each($('input[name="' + $formElem.attr('name') + '"]'), function () {
-                                var $radio = $(this);
-                                $radio.next('div').removeClass().addClass((checkedState($radio) + ' superCuteFormElemWrapper'));
-                            });
-                        }
+						$.superCuteForms.refresh($formElem[0]);
                     });
                 } else {
-                    $formElem.addClass('superCuteFormElem').wrap('<div class="' + type + ' superCuteFormElemWrapper"></div>');
+                    $formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>');
                 }
-            }
-
+           }
         });
-
-        // returns affected form elements as a jQuery collection, NOT a collection of the new parent elements
-        return $(arr);
-    };
-
-    // utilities
-    $.superCuteForms = {};
+        return $(affectedArr);		
+	}
 
     $.superCuteForms.undo = function (selector) {
-        var $selection = arguments.length && $(arguments[0]).length ? $(arguments[0]) : !arguments.length ? $('body') : '';
-        $($selection).find('.superCuteFormElem').unwrap();
-        $($selection).find('.superCuteFormElemWrapper').remove();
-        $.each($('.superCuteFormElem'), function () {
-            $(this).removeClass('superCuteFormElem');
+		var $selection = $(getSelection(selector));
+		$.each($selection, function () {
+            if($(this).hasClass('superCuteFormElem')){
+				$(this).parent().find('.superCuteFormElemWrapper').remove();
+            	$(this).unwrap();
+	            $(this).removeClass('superCuteFormElem');
+				affectedArr.splice(affectedArr.indexOf(this),1);
+            }
         });
     };
 
     $.superCuteForms.affected = function () {
-        return $('.superCuteFormElem');
+        return $(affectedArr);
     }
 
-    $.superCuteForms.refresh = function () {
-        var arr = [];
+    $.superCuteForms.refresh = function (selector) {
+        var arr = [],
+			$selection = $(getSelection(selector)),
+			updateStatus = function($formElem){
+	            if ($formElem.hasClass('superCuteFormElem')) {
+	                arr.push($formElem);
+					var inputType = type($formElem);
+	                if (inputType != 'select') {
+						var state = checkedState($formElem);
+	                    if (inputType === "checkbox" && !$formElem.next('div').hasClass(state)) {
+	                        $formElem.next('div').removeClass(classToRemove).addClass(state);
+	                    } else {
+	                        $.each($('input[name="' + $formElem.attr('name') + '"]'), function () {
+	                            var $radio = $(this),
+								state = checkedState($radio);
+								if (!$radio.next('div').hasClass(state)) {
+	                            	$radio.next('div').removeClass(classToRemove).addClass(state);
+								}
+	                        });
+	                    }
+	                }
+	            }
+			};
 
-        $('body').find('input[type="checkbox"], input[type="radio"], select').each(function () {
-
-            var $formElem = $(this);
-
-            if ($formElem.hasClass('superCuteFormElem')) {
-                var type = $formElem.attr('type') || 'select',
-					classToRemove,
-                    checkedState = function ($inputElem) {
-                        var state;
-                        if ($inputElem[0].checked) {
-							state = "checked";
-							classToRemove = "unchecked";
-						} else {
-							state = "unchecked";
-							classToRemove = "checked";
-						}
-                        return state;
-                    };
-                arr.push($formElem);
-                if (type != 'select') {
-					var state = checkedState($formElem);
-                    if (type === "checkbox" && !$formElem.next('div').hasClass(state)) {
-                        $formElem.next('div').removeClass(classToRemove).addClass(state);
-                    } else {
-                        $.each($('input[name="' + $formElem.attr('name') + '"]'), function () {
-                            var $radio = $(this),
-							state = checkedState($radio);
-							if (!$formElem.next('div').hasClass(state)) {
-                            	$radio.next('div').removeClass(classToRemove).addClass(state);
-							}
-                        });
-                    }
-                }
-            }
-
+		$.each($selection, function () {
+			updateStatus($(this));
         });
 
-        // returns affected form elements as a jQuery collection, NOT a collection of the new parent elements
         return $(arr);
     }
 
@@ -120,23 +125,28 @@
 
 /*
 
-!!! USAGE EXAMPLES !!!
+Example of initiating plugin, which will make checkboxes, radios, and selects
+super cute.
 
-Example:
+*Note, all methods below accept one of three types of selectors as a parameter;
+no selector, a non-form (check/radio/select) element selector, or form element
+selectors.  However, it will bork if you give it a mix of form elements and
+non-form elements:
 
-	$( "body" ).superCuteForms();
+	$.superCuteForms.wrap(); // no param, acts on all check/radio/select in body
 
-Example of undoing any changes made by superCuteForms:
+	$.superCuteForms.wrap('.test1'); // non-form (check/radio/select) element, only acts on check/radio/select within selection
+
+	$.superCuteForms.wrap('input[type="checkbox"],select'); // form element, acts on only elements provided
+
+	$.superCuteForms.wrap('.test1, input'); // this won't work correctly, fixing this would increase execution time -- not a priority	
+
+Example of undoing any changes made by superCuteForms. Removes all added elements
+and classes:
 
 	$.superCuteForms.undo();
 
-Example of undoing any changes made by superCuteForms within optional
-selection query (won't affect elements outside selection):
-
-	$.superCuteForms.undo('div.myClass');
-
-Example of retrieving jQuery collection of all elements on page
-affected by superCuteForms, including additional divs added by plugin:
+Example of retrieving all (check/radio/select) on page affected by superCuteForms:
 
 	$.superCuteForms.affected();
 
@@ -146,7 +156,7 @@ change() method isn't used:
 
 	$.superCuteForms.refresh();
 
-Using refresh() won't be necessary if you alter checkbox and radio
+*Note, using refresh() won't be necessary if you alter checkbox and radio
 selected/checked status using change(), for example:
 
 $('input[type="checkbox"]').attr('checked','true').change();

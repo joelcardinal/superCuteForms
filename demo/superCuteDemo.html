@@ -13,7 +13,7 @@
 </head>
 <body>
 	
-	<div class="space">
+	<div class="space test1">
 		<input type="checkbox" value="myCheckBoxTest">
 	</div>
 
@@ -31,28 +31,124 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script src="../js/superCuteForms.js"></script>
+	<!--	 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Uniform.js/2.1.2/jquery.uniform.min.js"></script>
+	-->	
+
 	<script>
- 
+		//Older version of uniform.js below 
+		(function(b){b.uniform={options:{selectClass:"selector",radioClass:"radio",checkboxClass:"checker",fileClass:"uploader",filenameClass:"filename",fileBtnClass:"action",fileDefaultText:"No file selected",fileBtnText:"Choose File",checkedClass:"checked",focusClass:"focus",disabledClass:"disabled",activeClass:"active",hoverClass:"hover",useID:!0,idPrefix:"uniform",resetSelector:!1,autoHide:!0},elements:[]};b.support.selectOpacity=b.browser.msie&&7>b.browser.version?!1:!0;b.fn.uniform=function(a){function l(a){a=
+		b(a).get();1<a.length?b.each(a,function(a,c){b.uniform.elements.push(c)}):b.uniform.elements.push(a)}a=b.extend(b.uniform.options,a);var q=this;!1!=a.resetSelector&&b(a.resetSelector).mouseup(function(){setTimeout(function(){b.uniform.update(q)},10)});b.uniform.restore=function(a){void 0==a&&(a=b(b.uniform.elements));b(a).each(function(){b(this).is(":checkbox")?b(this).unwrap().unwrap():b(this).is("select")?(b(this).siblings("span").remove(),b(this).unwrap()):b(this).is(":radio")?b(this).unwrap().unwrap():
+		b(this).is(":file")?(b(this).siblings("span").remove(),b(this).unwrap()):b(this).is("button, :submit, :reset, a, input[type='button']")&&b(this).unwrap().unwrap();b(this).unbind(".uniform");b(this).css("opacity","1");var d=b.inArray(b(a),b.uniform.elements);b.uniform.elements.splice(d,1)})};b.uniform.noSelect=function(a){function d(){return!1}b(a).each(function(){this.onselectstart=this.ondragstart=d;b(this).mousedown(d).css({MozUserSelect:"none"})})};b.uniform.update=function(c){void 0==c&&(c=b(b.uniform.elements));
+		c=b(c);c.each(function(){var d=b(this);if(d.is("select")){var e=d.siblings("span"),f=d.parent("div");f.removeClass(a.hoverClass+" "+a.focusClass+" "+a.activeClass);e.html(d.find(":selected").html());d.is(":disabled")?f.addClass(a.disabledClass):f.removeClass(a.disabledClass)}else if(d.is(":checkbox"))e=d.closest("span"),f=d.closest("div"),f.removeClass(a.hoverClass+" "+a.focusClass+" "+a.activeClass),e.removeClass(a.checkedClass),d.is(":checked")&&e.addClass(a.checkedClass),d.is(":disabled")?f.addClass(a.disabledClass):
+		f.removeClass(a.disabledClass);else if(d.is(":radio"))e=d.closest("span"),f=d.closest("div"),f.removeClass(a.hoverClass+" "+a.focusClass+" "+a.activeClass),e.removeClass(a.checkedClass),d.is(":checked")&&e.addClass(a.checkedClass),d.is(":disabled")?f.addClass(a.disabledClass):f.removeClass(a.disabledClass);else if(d.is(":file"))f=d.parent("div"),e=d.siblings(a.filenameClass),btnTag=d.siblings(a.fileBtnClass),f.removeClass(a.hoverClass+" "+a.focusClass+" "+a.activeClass),e.text(d.val()),d.is(":disabled")?
+		f.addClass(a.disabledClass):f.removeClass(a.disabledClass);else if(d.is(":submit")||d.is(":reset")||d.is("button")||d.is("a")||c.is("input[type=button]"))f=d.closest("div"),f.removeClass(a.hoverClass+" "+a.focusClass+" "+a.activeClass),d.is(":disabled")?f.addClass(a.disabledClass):f.removeClass(a.disabledClass)})};return this.each(function(){if(b.support.selectOpacity){var c=b(this);if(c.is("select")){if(!0!=c.attr("multiple")&&(void 0==c.attr("size")||1>=c.attr("size"))){var d=b(c),e=b("<div />"),
+		f=b("<span />");"none"==!d.css("display")&&a.autoHide&&e.hide();e.addClass(a.selectClass);a.useID&&""!=c.attr("id")&&e.attr("id",a.idPrefix+"-"+c.attr("id"));d=c.find(":selected:first");0==d.length&&(d=c.find("option:first"));f.html(d.html());c.css("opacity",0);c.wrap(e);c.before(f);e=c.parent("div");f=c.siblings("span");c.bind({"change.uniform":function(){f.text(c.find(":selected").html());e.removeClass(a.activeClass)},"focus.uniform":function(){e.addClass(a.focusClass)},"blur.uniform":function(){e.removeClass(a.focusClass);
+		e.removeClass(a.activeClass)},"mousedown.uniform touchbegin.uniform":function(){e.addClass(a.activeClass)},"mouseup.uniform touchend.uniform":function(){e.removeClass(a.activeClass)},"click.uniform touchend.uniform":function(){e.removeClass(a.activeClass)},"mouseenter.uniform":function(){e.addClass(a.hoverClass)},"mouseleave.uniform":function(){e.removeClass(a.hoverClass);e.removeClass(a.activeClass)},"keyup.uniform":function(){f.text(c.find(":selected").html())}});b(c).attr("disabled")&&e.addClass(a.disabledClass);
+		b.uniform.noSelect(f);l(c)}}else if(c.is(":checkbox")){var d=b(c),j=b("<div />"),m=b("<span />");"none"==!d.css("display")&&a.autoHide&&j.hide();j.addClass(a.checkboxClass);a.useID&&""!=c.attr("id")&&j.attr("id",a.idPrefix+"-"+c.attr("id"));b(c).wrap(j);b(c).wrap(m);m=c.parent();j=m.parent();b(c).css("opacity",0).bind({"focus.uniform":function(){j.addClass(a.focusClass)},"blur.uniform":function(){j.removeClass(a.focusClass)},"click.uniform touchend.uniform":function(){b(c).attr("checked")?m.addClass(a.checkedClass):
+		m.removeClass(a.checkedClass)},"mousedown.uniform touchbegin.uniform":function(){j.addClass(a.activeClass)},"mouseup.uniform touchend.uniform":function(){j.removeClass(a.activeClass)},"mouseenter.uniform":function(){j.addClass(a.hoverClass)},"mouseleave.uniform":function(){j.removeClass(a.hoverClass);j.removeClass(a.activeClass)}});b(c).attr("checked")&&m.addClass(a.checkedClass);b(c).attr("disabled")&&j.addClass(a.disabledClass);l(c)}else if(c.is(":radio")){var d=b(c),k=b("<div />"),n=b("<span />");
+		"none"==!d.css("display")&&a.autoHide&&k.hide();k.addClass(a.radioClass);a.useID&&""!=c.attr("id")&&k.attr("id",a.idPrefix+"-"+c.attr("id"));b(c).wrap(k);b(c).wrap(n);n=c.parent();k=n.parent();b(c).css("opacity",0).bind({"focus.uniform":function(){k.addClass(a.focusClass)},"blur.uniform":function(){k.removeClass(a.focusClass)},"click.uniform touchend.uniform":function(){if(b(c).attr("checked")){var d=a.radioClass.split(" ")[0];b("."+d+" span."+a.checkedClass+":has([name='"+b(c).attr("name")+"'])").removeClass(a.checkedClass);
+		n.addClass(a.checkedClass)}else n.removeClass(a.checkedClass)},"mousedown.uniform touchend.uniform":function(){b(c).is(":disabled")||k.addClass(a.activeClass)},"mouseup.uniform touchbegin.uniform":function(){k.removeClass(a.activeClass)},"mouseenter.uniform touchend.uniform":function(){k.addClass(a.hoverClass)},"mouseleave.uniform":function(){k.removeClass(a.hoverClass);k.removeClass(a.activeClass)}});b(c).attr("checked")&&n.addClass(a.checkedClass);b(c).attr("disabled")&&k.addClass(a.disabledClass);
+		l(c)}else if(c.is(":file")){var g=b(c),h=b("<div />"),p=b("<span>"+a.fileDefaultText+"</span>"),d=b("<span>"+a.fileBtnText+"</span>");"none"==!g.css("display")&&a.autoHide&&h.hide();h.addClass(a.fileClass);p.addClass(a.filenameClass);d.addClass(a.fileBtnClass);a.useID&&""!=g.attr("id")&&h.attr("id",a.idPrefix+"-"+g.attr("id"));g.wrap(h);g.after(d);g.after(p);h=g.closest("div");p=g.siblings("."+a.filenameClass);d=g.siblings("."+a.fileBtnClass);if(!g.attr("size")){var q=h.width();g.attr("size",q/10)}var r=
+		function(){var b=g.val();""===b?b=a.fileDefaultText:(b=b.split(/[\/\\]+/),b=b[b.length-1]);p.text(b)};r();g.css("opacity",0).bind({"focus.uniform":function(){h.addClass(a.focusClass)},"blur.uniform":function(){h.removeClass(a.focusClass)},"mousedown.uniform":function(){b(c).is(":disabled")||h.addClass(a.activeClass)},"mouseup.uniform":function(){h.removeClass(a.activeClass)},"mouseenter.uniform":function(){h.addClass(a.hoverClass)},"mouseleave.uniform":function(){h.removeClass(a.hoverClass);h.removeClass(a.activeClass)}});
+		b.browser.msie?g.bind("click.uniform.ie7",function(){setTimeout(r,0)}):g.bind("change.uniform",r);g.attr("disabled")&&h.addClass(a.disabledClass);b.uniform.noSelect(p);b.uniform.noSelect(d);l(c)}else c.is(":text, :password, input[type='email']")?($el=b(c),$el.addClass($el.attr("type")),l(c)):c.is("textarea")?(b(c).addClass("uniform"),l(c)):c.is("a")||c.is(":submit")||c.is(":reset")||c.is("button")||c.is("input[type=button]")}})}
+		})(jQuery);
+	</script>
+
+	<script>
+	 
 		// init
 		$(document).ready(function(){
-			$( "body" ).superCuteForms();
+
+			console.time('superCuteForms: wrap');
+			$.superCuteForms.wrap();
+			console.timeEnd('superCuteForms: wrap');
+
+			console.log('====================');			
+						
+			console.time('superCuteForms: affected');
+			$.superCuteForms.affected();
+			console.timeEnd('superCuteForms: affected');
+
+			console.log('====================');			
+						
+			console.time('superCuteForms: refresh');
+			$.superCuteForms.refresh();
+			console.timeEnd('superCuteForms: refresh');
+			
+			console.log('====================');			
+						
+			console.time('superCuteForms: undo');
+			$.superCuteForms.undo();
+			console.timeEnd('superCuteForms: undo');	
+		
+			console.log('====================');
+			console.log('====================');
+
+			console.time('uniform: (wrap)');
+			$( "input,select" ).uniform();
+			console.timeEnd('uniform: (wrap)');
+
+			console.log('====================');			
+						
+			console.time('uniform: elements');
+			$.uniform.elements;
+			console.timeEnd('uniform: elements');
+
+			console.log('====================');			
+						
+			console.time('uniform: update');
+			$.uniform.update();
+			console.timeEnd('uniform: update');
+			
+			console.log('====================');			
+					
+			console.time('uniform: restore');
+			// note that older uniform.js restore doesn't remove the inline opacity style it adds to elements
+			$.uniform.restore();
+			console.timeEnd('uniform: restore');
+					
 		});
 		
 		/*
 
-		!!! USAGE EXAMPLES !!!
+		Example of initiating plugin, which will make checkboxes, radios, and selects
+		super cute.
+		
+		*Note, all methods below accept one of three types of selectors as a parameter;
+		no selector, a non-form (check/radio/select) element selector, or form element
+		selectors.  However, it will bork if you give it a mix of form elements and
+		non-form elements:
 
-		Usage example:
-		$( "body" ).superCuteForms();
+			$.superCuteForms.wrap(); // no param, acts on all check/radio/select in body
+		
+			$.superCuteForms.wrap('.test1'); // non-form (check/radio/select) element, only acts on check/radio/select within selection
+		
+			$.superCuteForms.wrap('input[type="checkbox"],select'); // form element, acts on only elements provided
+		
+			$.superCuteForms.wrap('.test1, input'); // this won't work correctly, fixing this would increase execution time -- not a priority	
 
-		Usage example of undoing any changes made by superCuteForms
-		$.superCuteForms.undo();
+		Example of undoing any changes made by superCuteForms. Removes all added elements
+		and classes:
 
-		Usage example of undoing any changes made by superCuteForms within optional selection query (won't affect elements outside selection):
-		$.superCuteForms.undo('div.myClass');
+			$.superCuteForms.undo();
 
-		Usage example of retrieving jQuery collection of all elements on page affected by superCuteForms
-		$.superCuteForms.affected();
+		Example of retrieving all (check/radio/select) on page affected by superCuteForms:
+
+			$.superCuteForms.affected();
+
+		Example of correcting checkbox and radio selected/checked status, after
+		javascript is used to alter the status of a form element if jQuery's
+		change() method isn't used:
+
+			$.superCuteForms.refresh();
+
+		*Note, using refresh() won't be necessary if you alter checkbox and radio
+		selected/checked status using change(), for example:
+
+		$('input[type="checkbox"]').attr('checked','true').change();
+
+		var $radios = $('input:radio[name=r1]'); $radios.filter('[value=myRadio1]').prop('checked', true).change();
 
 		*/
 

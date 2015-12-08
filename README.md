@@ -19,22 +19,45 @@ Requirements
 Usage Examples
 --------------
 
-Example
-```javascript
-$( "body" ).superCuteForms();
-```
+Example of initiating plugin, which will make checkboxes, radios, and selects
+super cute.
 
-Example of undoing any changes made by superCuteForms
-```javascript
-$.superCuteForms.undo();
+*Note, all methods below accept one of three types of selectors as a parameter;
+no selector, a non-form (check/radio/select) element selector, or form element
+selectors.  However, it will bork if you give it a mix of form elements and
+non-form elements:
 ```
+	// no param, acts on all check/radio/select in body
+	$.superCuteForms.wrap();
 
-Example of undoing any changes made by superCuteForms within optional selection query (won't affect elements outside selection)
-```javascript
-$.superCuteForms.undo('div.myClass');
+	// non-form (check/radio/select) element, only acts on check/radio/select within selection
+	$.superCuteForms.wrap('.test1');
+
+	// form element, acts on only elements provided
+	$.superCuteForms.wrap('input[type="checkbox"],select');
+
+  // this won't work correctly, fixing this would increase execution time -- not a priority
+	$.superCuteForms.wrap('.test1, input'); 	
 ```
+Example of undoing any changes made by superCuteForms. Removes all added elements
+and classes:
+```
+	$.superCuteForms.undo();
+```
+Example of retrieving all (check/radio/select) on page affected by superCuteForms:
+```
+	$.superCuteForms.affected();
+```
+Example of correcting checkbox and radio selected/checked status, after
+javascript is used to alter the status of a form element if jQuery's
+change() method isn't used:
+```
+	$.superCuteForms.refresh();
+```
+*Note, using refresh() won't be necessary if you alter checkbox and radio
+selected/checked status using jQuery's change() method, for example:
+```
+$('input[type="checkbox"]').attr('checked','true').change();
 
-Retrieving jQuery collection of all elements on page affected by superCuteForms
-```javascript
-$.superCuteForms.affected();
+var $radios = $('input:radio[name=r1]'); $radios.filter('[value=myRadio1]').prop('checked', true).change();
 ```

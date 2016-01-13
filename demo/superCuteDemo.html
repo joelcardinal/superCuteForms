@@ -112,44 +112,60 @@
 		
 		/*
 
-		Example of initiating plugin, which will make checkboxes, radios, and selects
-		super cute.
+			Example of initiating plugin, which will make checkboxes, radios, and selects
+			super cute.
+
+			*Note, all methods below accept a parameter; no selector, jQuery selection, a
+			non-form (check/radio/select) element selector, or form element selectors.
+			However, it will bork if you give it a mix of form elements and non-form elements:
+
+				// no selection
+
+				// no param, acts on all check/radio/select in body
+				$.superCuteForms.wrap();
+
+
+				// selector strings
+
+				// non-form (check/radio/select) element, only acts on check/radio/select within selection
+				$.superCuteForms.wrap('.test1');
+	
+				// form element, acts on only elements provided
+				$.superCuteForms.wrap('input[type="checkbox"],select');
+	
+	
+				// jQuery selection
+	
+				// jQuery selection, like above, acts on check/radio/select within query element or provided check/radio/select
+				$.superCuteForms.wrap($('.space')); 
+				$.superCuteForms.wrap($('input').not('.test1 *')); 
+
+
+				// this WILL NOT work correctly, fixing this would increase execution time -- not a priority
+				$.superCuteForms.wrap($('div:first', select)); 
+
+			Example of undoing any changes made by superCuteForms. Removes all added elements
+			and classes:
+
+				$.superCuteForms.undo();
+
+			Example of retrieving all (check/radio/select) on page affected by superCuteForms:
+
+				$.superCuteForms.affected();
+
+			Example of correcting checkbox and radio selected/checked status, after
+			javascript is used to alter the status of a form element if jQuery's
+			change() method isn't used:
+
+				$.superCuteForms.refresh();
+
+			*Note, using refresh() won't be necessary if you alter checkbox and radio
+			selected/checked status using change(), for example:
+
+			$('input[type="checkbox"]').attr('checked','true').change();
+
+			var $radios = $('input:radio[name=r1]'); $radios.filter('[value=myRadio1]').prop('checked', true).change();
 		
-		*Note, all methods below accept one of three types of selectors as a parameter;
-		no selector, a non-form (check/radio/select) element selector, or form element
-		selectors.  However, it will bork if you give it a mix of form elements and
-		non-form elements:
-
-			$.superCuteForms.wrap(); // no param, acts on all check/radio/select in body
-		
-			$.superCuteForms.wrap('.test1'); // non-form (check/radio/select) element, only acts on check/radio/select within selection
-		
-			$.superCuteForms.wrap('input[type="checkbox"],select'); // form element, acts on only elements provided
-		
-			$.superCuteForms.wrap('.test1, input'); // this won't work correctly, fixing this would increase execution time -- not a priority	
-
-		Example of undoing any changes made by superCuteForms. Removes all added elements
-		and classes:
-
-			$.superCuteForms.undo();
-
-		Example of retrieving all (check/radio/select) on page affected by superCuteForms:
-
-			$.superCuteForms.affected();
-
-		Example of correcting checkbox and radio selected/checked status, after
-		javascript is used to alter the status of a form element if jQuery's
-		change() method isn't used:
-
-			$.superCuteForms.refresh();
-
-		*Note, using refresh() won't be necessary if you alter checkbox and radio
-		selected/checked status using change(), for example:
-
-		$('input[type="checkbox"]').attr('checked','true').change();
-
-		var $radios = $('input:radio[name=r1]'); $radios.filter('[value=myRadio1]').prop('checked', true).change();
-
 		*/
 
 	</script>

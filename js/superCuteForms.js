@@ -42,11 +42,12 @@
 					$selection = $('body').find(elemSelector);
 				}
 			}else{
-				var tagName = $(selector)[0].tagName.toLowerCase();
+				var query = typeof selector === 'string' ? $(selector) : selector;
+				var tagName = query[0].tagName.toLowerCase();
 				if( tagName == 'input' || tagName == 'select'){
-					$selection = $(selector);
+					$selection = query;
 				}else{
-					$selection = $(selector).find(elemSelector);
+					$selection = query.find(elemSelector);
 				}
 			}
 			return $selection;
@@ -128,18 +129,34 @@
 Example of initiating plugin, which will make checkboxes, radios, and selects
 super cute.
 
-*Note, all methods below accept one of three types of selectors as a parameter;
-no selector, a non-form (check/radio/select) element selector, or form element
-selectors.  However, it will bork if you give it a mix of form elements and
-non-form elements:
+*Note, all methods below accept a parameter; no selector, jQuery selection, a
+non-form (check/radio/select) element selector, or form element selectors.
+However, it will bork if you give it a mix of form elements and non-form elements:
 
-	$.superCuteForms.wrap(); // no param, acts on all check/radio/select in body
+	// no selection
 
-	$.superCuteForms.wrap('.test1'); // non-form (check/radio/select) element, only acts on check/radio/select within selection
+	// no param, acts on all check/radio/select in body
+	$.superCuteForms.wrap();
 
-	$.superCuteForms.wrap('input[type="checkbox"],select'); // form element, acts on only elements provided
 
-	$.superCuteForms.wrap('.test1, input'); // this won't work correctly, fixing this would increase execution time -- not a priority	
+	// selector strings
+
+	// non-form (check/radio/select) element, only acts on check/radio/select within selection
+	$.superCuteForms.wrap('.test1');
+	
+	// form element, acts on only elements provided
+	$.superCuteForms.wrap('input[type="checkbox"],select');
+	
+	
+	// jQuery selection
+	
+	// jQuery selection, like above, acts on check/radio/select within query element or provided check/radio/select
+	$.superCuteForms.wrap($('.space')); 
+	$.superCuteForms.wrap($('input').not('.test1 *')); 
+
+
+	// this WILL NOT work correctly, fixing this would increase execution time -- not a priority
+	$.superCuteForms.wrap($('div:first', select)); 
 
 Example of undoing any changes made by superCuteForms. Removes all added elements
 and classes:

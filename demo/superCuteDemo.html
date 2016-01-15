@@ -155,7 +155,7 @@
 
 			Example of correcting checkbox and radio selected/checked status, after
 			javascript is used to alter the status of a form element if jQuery's
-			change() method isn't used:
+			change() method isn't used (or vanilla javascript):
 
 				$.superCuteForms.refresh();
 
@@ -165,6 +165,9 @@
 			$('input[type="checkbox"]').attr('checked','true').change();
 
 			var $radios = $('input:radio[name=r1]'); $radios.filter('[value=myRadio1]').prop('checked', true).change();
+		
+			Here's a resource for implementing jQuery's change() method in vanilla javascript:
+			http://stackoverflow.com/questions/24172963/jquery-change-method-in-vanilla-javascript
 		
 		*/
 

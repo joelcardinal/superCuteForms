@@ -42,7 +42,7 @@
 					$selection = $('body').find(elemSelector);
 				}
 			}else{
-				var query = typeof selector === 'string' ? $(selector) : selector;
+				var query = $(selector);
 				var tagName = query[0].tagName.toLowerCase();
 				if( tagName == 'input' || tagName == 'select'){
 					$selection = query;

@@ -6,7 +6,7 @@
 
 /* checkboxes & radios */
 
-div.checkbox, div.radio {
+div.checkbox.superCuteFormElemWrapper, div.radio.superCuteFormElemWrapper {
 	width: 16px;
 	height: 16px;
 	margin: 0;
@@ -14,7 +14,7 @@ div.checkbox, div.radio {
 	position: relative;
 	display: block;
 }
-div.checkbox input, div.radio input {
+div.checkbox.superCuteFormElemWrapper input, div.radio.superCuteFormElemWrapper input {
 	position: absolute;
 	width: 16px;
 	height: 16px;
@@ -32,25 +32,25 @@ div.checkbox input, div.radio input {
 	-khtml-opacity: 0.5;
 
 }
-div.checkbox div, div.radio div {
+div.checkbox.superCuteFormElemWrapper div, div.radio.superCuteFormElemWrapper div {
 	width: 16px;
 	height: 16px;
 	background-repeat: no-repeat;
 	-webkit-font-smoothing: antialiased;
 }
 
-div.checkbox div.checked {
+div.checkbox.superCuteFormElemWrapper div.checked {
 	background: no-repeat 0px -25px url(../img/sprite_map/input_select.png);
 	border: thin solid #aaa;
 }
-div.checkbox div.unchecked {
+div.checkbox.superCuteFormElemWrapper div.unchecked {
 	background: no-repeat 0px -42px url(../img/sprite_map/input_select.png);
 	border: thin solid #aaa;
 }
-div.radio div.checked {
+div.radio.superCuteFormElemWrapper div.checked {
 	background: no-repeat 0px -59px url(../img/sprite_map/input_select.png);
 }
-div.radio div.unchecked {
+div.radio.superCuteFormElemWrapper div.unchecked {
 	background: no-repeat 0px -76px url(../img/sprite_map/input_select.png);
 }
 
@@ -63,7 +63,7 @@ div.radio div.unchecked {
 *	overlap necessary.
 */
 
-div.select {
+div.select.superCuteFormElemWrapper {
 	height: 24px;
 	width: 150px;
 	background: no-repeat right 0px url(../img/sprite_map/input_select.png);
@@ -71,7 +71,7 @@ div.select {
 	background-color: #FAFAFA;
 	border: 1px solid #ccc;
 }
-div.select select {
+div.select.superCuteFormElemWrapper select {
 	height: 24px;
 	width: 170px;
 	outline: none;

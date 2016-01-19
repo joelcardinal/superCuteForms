@@ -50,6 +50,7 @@
 					$selection = query.find(elemSelector);
 				}
 			}
+			//return $selection.not('input[type="hidden"]');
 			return $selection;
 		};
 		
@@ -60,16 +61,18 @@
            var $formElem = $(this);
            if (!$formElem.hasClass(superCuteFormElemClass)) {
 				var inputType = type($formElem);
-                affectedArr.push(this);
-                if (inputType != 'select') {
-					var state = checkedState($formElem);
-					$formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>').parent().append('<div class="' + state + ' ' + superCuteFormElemWrapperClass + '"></div>');
-                    $formElem.on("change", function () {
-						$.superCuteForms.refresh($formElem[0]);
-                    });
-                } else {
-                    $formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>');
-                }
+				if(inputType !== 'hidden' && inputType !== 'text'){ /* NOTE: quicker execution, than using not() in getSelection */
+	                affectedArr.push(this);
+	                if (inputType != 'select') {
+						var state = checkedState($formElem);
+						$formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>').parent().append('<div class="' + state + ' ' + superCuteFormElemWrapperClass + '"></div>');
+	                    $formElem.on("change", function () {
+							$.superCuteForms.refresh($formElem[0]);
+	                    });
+	                } else {
+	                    $formElem.addClass(superCuteFormElemClass).wrap('<div class="' + inputType + ' ' + superCuteFormElemWrapperClass + '"></div>');
+	                }	
+				}
            }
         });
         return $(affectedArr);		

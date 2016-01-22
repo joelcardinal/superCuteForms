@@ -43,14 +43,13 @@
 				}
 			}else{
 				var query = $(selector);
-				var tagName = query[0].tagName.toLowerCase();
-				if( tagName == 'input' || tagName == 'select'){
+				var tagName = query.length && query[0].tagName ? query[0].tagName.toLowerCase() : null;
+				if( tagName && (tagName == 'input' || tagName == 'select')){
 					$selection = query;
 				}else{
 					$selection = query.find(elemSelector);
-				}
+				}	
 			}
-			//return $selection.not('input[type="hidden"]');
 			return $selection;
 		};
 		

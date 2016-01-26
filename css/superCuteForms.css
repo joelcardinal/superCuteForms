@@ -23,13 +23,13 @@ div.checkbox.superCuteFormElemWrapper input, div.radio.superCuteFormElemWrapper 
 	opacity: 0;
 	/* opacity fallbacks */
 	/* IE 8 */
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 	/* IE 5-7 */
-	filter: alpha(opacity=50);
+	filter: alpha(opacity=0);
 	/* Netscape */
-	-moz-opacity: 0.5;
+	-moz-opacity: 0;
 	/* Safari 1.x */
-	-khtml-opacity: 0.5;
+	-khtml-opacity: 0;
 
 }
 div.checkbox.superCuteFormElemWrapper div, div.radio.superCuteFormElemWrapper div {
@@ -57,8 +57,7 @@ div.radio.superCuteFormElemWrapper div.unchecked {
 /* selects */
 
 /*
-*	Wrapping div is added automatically via js,
-*	and will require CSS adjustment so that it is
+*	Wrapping div is added automatically via js, and will require CSS adjustment so that it is
 *	less wide than the select (overflow hidden hides default arrow). Your img will depend on the
 *	overlap necessary.
 */

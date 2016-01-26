@@ -13,6 +13,7 @@ Licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.
 
 Requirements
 --------------
+* >IE7, Firefox, Chrome, Safari
 * jQuery 1.7 (but can probably use lower version)
 * The included CSS, you'll need to tweak it for your needs
 

@@ -58,8 +58,8 @@ div.radio.superCuteFormElemWrapper div.unchecked {
 
 /*
 *	Wrapping div is added automatically via js, and will require CSS adjustment so that it is
-*	less wide than the select (overflow hidden hides default arrow). Your img will depend on the
-*	overlap necessary.
+*	less wide than the select (overflow hidden hides default arrow). Your img, and browser,
+*	will depend on the overlap necessary.
 */
 
 div.select.superCuteFormElemWrapper {
